@@ -1,25 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'reactstrap';
+import Clock from './components/Clock';
+import React from 'react';
+import { Component } from 'react';
+import Loading from './components/Loading';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+class App extends React.Component {
+  state = { Loading: false }
+   
+  loadingPanel = () => {
+    this.setState((state) => {
+      return { Loading: !state.Loading }
+    })
+  }
+   
+  render() {
+    return (<div className="App">
+      <div className="text-center pt-4">
+
+        <Button color="primary" className="mb-3 button" onClick={this.loadingPanel} >
+          {this.state.Loading && "Close" || "Open"}</Button> <br />
+        
+        {this.state.Loading && <Loading />}
+      </div>
     </div>
-  );
+     
+    );
+  }
 }
 
 export default App;
